@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Home",
+    "url": "/"
+  },
+  {
+    "name": "Generate QR",
+    "url": "/generate"
+  },
+  {
+    "name": "Blog",
+    "url": "/blog"
+  },
+  {
+    "name": "About Us",
+    "url": "/about"
+  }
+]

@@ -1,0 +1,49 @@
+---
+import { Icon } from "astro-icon/components";
+import footerMenu from "../config/footerMenu.json";
+
+interface FooterMenuItem {
+  name: string;
+  url: string;
+}
+---
+
+<footer class="bg-gray-50">
+  <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+    <div
+      class="sm:flex sm:flex-col sm:items-center sm:justify-between lg:flex-row"
+    >
+      <div
+        class="flex items-center justify-center gap-1 text-gray-500 sm:justify-start"
+      >
+        <Icon name="tabler:qrcode" size={20} />
+        <p class="pl-2 text-right text-sm tracking-tight">QR Codes For Free</p>
+        <p class="pl-2 text-right text-sm tracking-tight">
+          &copy; <span x-data="{ year: new Date().getFullYear() }" x-text="year"
+          ></span> All rights reserved.
+        </p>
+      </div>
+
+      <div
+        class="mt-4 flex flex-col items-center sm:mt-0 sm:text-right lg:items-end"
+      >
+        <ul
+          class="mt-2 flex flex-wrap justify-center gap-4 text-sm lg:justify-end"
+        >
+          {
+            (footerMenu as FooterMenuItem[]).map((item) => (
+              <li>
+                <a
+                  href={item.url}
+                  class="text-gray-500 transition hover:opacity-75"
+                >
+                  {item.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

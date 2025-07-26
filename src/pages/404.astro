@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+
+Astro.response.status = 404;
+---
+
+<Layout
+  title="404: Page Not Found - QR Codes For Free"
+  description="Sorry, the page you were looking for could not be found. You can return to the homepage to generate a free QR code."
+  robots="noindex, follow"
+>
+  <div class="flex flex-grow flex-col bg-gray-50 font-sans antialiased">
+    <main class="flex flex-grow items-center justify-center p-4">
+      <section
+        class="w-full max-w-md rounded-lg bg-white p-8 text-center shadow-lg"
+      >
+        <div class="mb-6 flex flex-col items-center justify-center">
+          <Icon name="tabler:qrcode-off" size={80} class="mb-4 text-teal-500" />
+          <h1 class="mb-2 text-8xl font-extrabold text-gray-800">404</h1>
+          <h2 class="text-2xl font-bold text-gray-700 md:text-3xl">
+            Page Not Found
+          </h2>
+        </div>
+
+        <p class="mb-6 leading-relaxed text-gray-600">
+          Oops! It looks like the page you're looking for doesn't exist. Perhaps
+          it was moved, deleted, or you mistyped the address.
+        </p>
+
+        <a
+          href="/"
+          class="inline-flex items-center rounded-md border border-transparent bg-teal-600 px-6 py-3 text-base font-medium text-white shadow-sm transition duration-150 ease-in-out hover:bg-teal-700 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
+        >
+          <Icon name="tabler:home" class="mr-2 -ml-1 h-5 w-5" />
+          Go to Homepage
+        </a>
+      </section>
+    </main>
+  </div>
+</Layout>
