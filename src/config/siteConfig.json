@@ -4,5 +4,7 @@
   "description": "A great description of my awesome Astro site, perfect for SEO.",
   "author": "Your Name or Company Name",
   "image": "/social/default-og.png",
-  "twitterHandle": "@yourTwitterHandle"
+  "twitterHandle": "@yourTwitterHandle",
+  "logoIcon": "alien-filled",
+  "url": "https://my-domain.com"
 }

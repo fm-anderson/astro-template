@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import siteConfig from "../config/siteConfig.json";
 
 const footerMenu = [
   {
@@ -29,8 +30,10 @@ const footerMenu = [
       <div
         class="flex items-center justify-center gap-1 text-gray-500 sm:justify-start"
       >
-        <Icon name="tabler:qrcode" size={20} />
-        <p class="pl-2 text-right text-sm tracking-tight">QR Codes For Free</p>
+        <Icon name=`tabler:${siteConfig.logoIcon}` size={20} />
+        <p class="pl-2 text-right text-sm tracking-tight">
+          {siteConfig.siteName}
+        </p>
         <p class="pl-2 text-right text-sm tracking-tight">
           &copy; <span x-data="{ year: new Date().getFullYear() }" x-text="year"
           ></span> All rights reserved.
