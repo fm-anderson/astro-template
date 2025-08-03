@@ -1,12 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
+import siteConfig from "../config/siteConfig.json";
 
 Astro.response.status = 404;
 ---
 
 <Layout
-  title="404: Page Not Found - QR Codes For Free"
+  title=`404: Page Not Found - ${siteConfig.siteName}`
   description="Sorry, the page you were looking for could not be found. You can return to the homepage to generate a free QR code."
   robots="noindex, follow"
 >

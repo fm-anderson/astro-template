@@ -1,0 +1,91 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"blog">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout
+  title={entry.data.title}
+  description={entry.data.description}
+  contentType="article"
+  publishedTime={entry.data.publishedTime.toISOString()}
+  modifiedTime={entry.data.modifiedTime?.toISOString()}
+  author={entry.data.author}
+  section={entry.data.section}
+  tags={entry.data.tags}
+  image={entry.data.image}
+>
+  <main class="px-6 py-12 sm:py-16">
+    <article class="mx-auto max-w-3xl">
+      <header class="mb-8 text-center">
+        <p class="mb-2 text-base font-semibold text-teal-600">
+          {entry.data.section}
+        </p>
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+          {entry.data.title}
+        </h1>
+        <div
+          class="mt-4 flex items-center justify-center gap-x-4 text-sm text-gray-500"
+        >
+          <span>By {entry.data.author}</span>
+          <span class="text-gray-300">•</span>
+          <time datetime={entry.data.publishedTime.toISOString()}>
+            {
+              new Date(entry.data.publishedTime).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+        </div>
+      </header>
+
+      {
+        entry.data.image && (
+          <figure class="my-8">
+            <Image
+              src={entry.data.image}
+              alt={`Featured image for ${entry.data.title}`}
+              class="aspect-video w-full rounded-xl object-cover shadow-lg"
+            />
+          </figure>
+        )
+      }
+
+      <div class="manual-prose max-w-none">
+        <Content />
+      </div>
+
+      {
+        entry.data.tags && entry.data.tags.length > 0 && (
+          <footer class="mt-12 border-t border-gray-200 pt-8">
+            <div class="flex flex-wrap gap-2">
+              <span class="mr-2 font-medium text-gray-800">Tags:</span>
+              {entry.data.tags.map((tag) => (
+                <span class="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-700">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </footer>
+        )
+      }
+    </article>
+  </main>
+</Layout>

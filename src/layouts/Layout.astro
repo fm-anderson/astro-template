@@ -21,7 +21,7 @@ interface Props {
 const {
   title = siteConfig.title,
   description = siteConfig.description,
-  image = siteConfig.image,
+  image = siteConfig.image, // TODO: A default image for social sharing
   author = siteConfig.author,
   url = Astro.url.href, // TODO: Canonical URL, defaults to the current page's URL (https://your-domain.com/your-page)
   robots = "index, follow",
@@ -34,6 +34,7 @@ const {
 
 // Construct full image URL if it's relative
 const fullImageUrl = new URL(image, Astro.url.origin).href;
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
 ---
 
 <html lang="en">
@@ -52,6 +53,10 @@ const fullImageUrl = new URL(image, Astro.url.origin).href;
     <meta name="theme-color" content="#ffffff" />
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
+
+    {/* --- Preconnect to key origins --- */}
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
 
     {/* --- SEO Meta Tags --- */}
     <title>{title}</title>
@@ -92,8 +97,26 @@ const fullImageUrl = new URL(image, Astro.url.origin).href;
     <meta name="twitter:image" content={fullImageUrl} />
     <meta name="twitter:site" content={siteConfig.twitterHandle} />
     <meta name="twitter:creator" content={siteConfig.twitterHandle} />
+
+    {GTM_ID && (
+      <script is:inline define:vars={{ GTM_ID }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;j.type="text/partytown";f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',GTM_ID);
+      </script>
+    )}
+
   </head>
   <body class="flex min-h-screen flex-col">
+    {GTM_ID && (
+      <noscript is:inline define:vars={{ GTM_ID }}>
+        <iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+    )}
+    
     <Header />
     <slot />
     <Footer />

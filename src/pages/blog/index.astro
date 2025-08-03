@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import BlogPostCard from "../../components/BlogPostCard.astro";
+
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.publishedTime.valueOf() - a.data.publishedTime.valueOf(),
+);
+---
+
+<Layout
+  title="QR Code Blog: Guides, Tips & Marketing Insights"
+  description="The official blog for QR Codes For Free. Explore expert guides, practical tips, and marketing strategies to master QR codes for your business or personal projects."
+>
+  <main class="mx-auto max-w-7xl px-6 py-12 sm:py-16">
+    <header class="mb-12 border-b border-gray-200 pb-8 text-center">
+      <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        The QR Code Marketing & Resource Hub
+      </h1>
+      <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
+        Your go-to resource for expert guides, practical tips, and creative
+        strategies. Learn how to make QR codes work for you.
+      </p>
+    </header>
+
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {allPosts.map((post) => <BlogPostCard post={post} />)}
+    </div>
+  </main>
+</Layout>

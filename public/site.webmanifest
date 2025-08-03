@@ -1,6 +1,6 @@
 {
-  "name": "QrCodesForFree",
-  "short_name": "QRCodes",
+  "name": "SiteNameGoesHere",
+  "short_name": "SiteName",
   "icons": [
     {
       "src": "/public/web-app-manifest-192x192.png",

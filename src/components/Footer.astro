@@ -1,11 +1,24 @@
 ---
 import { Icon } from "astro-icon/components";
-import footerMenu from "../config/footerMenu.json";
 
-interface FooterMenuItem {
-  name: string;
-  url: string;
-}
+const footerMenu = [
+  {
+    name: "Our Blog",
+    url: "/blog",
+  },
+  {
+    name: "Terms & Conditions",
+    url: "/terms-and-conditions",
+  },
+  {
+    name: "Privacy Policy",
+    url: "/privacy-policy",
+  },
+  {
+    name: "Cookies",
+    url: "/cookies",
+  },
+];
 ---
 
 <footer class="bg-gray-50">
@@ -31,7 +44,7 @@ interface FooterMenuItem {
           class="mt-2 flex flex-wrap justify-center gap-4 text-sm lg:justify-end"
         >
           {
-            (footerMenu as FooterMenuItem[]).map((item) => (
+            footerMenu.map((item) => (
               <li>
                 <a
                   href={item.url}
