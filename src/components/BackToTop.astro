@@ -1,0 +1,24 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div
+  x-data="{ show: false }"
+  @scroll.window="show = (window.pageYOffset > 400) ? true : false"
+>
+  <button
+    x-show="show"
+    @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 transform translate-y-2"
+    x-transition:enter-end="opacity-100 transform translate-y-0"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100 transform translate-y-0"
+    x-transition:leave-end="opacity-0 transform translate-y-2"
+    class="fixed right-5 bottom-5 z-50 rounded-full bg-teal-600 p-3 text-white shadow-lg hover:bg-teal-700 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
+    aria-label="Go to top"
+    style="display: none;"
+  >
+    <Icon name="tabler:arrow-up" class="h-6 w-6" />
+  </button>
+</div>
