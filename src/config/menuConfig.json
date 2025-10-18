@@ -1,0 +1,42 @@
+{
+  "headerMenu": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "About",
+      "url": "/#about"
+    },
+    {
+      "name": "FAQ",
+      "url": "/#faq"
+    },
+    {
+      "name": "Contact",
+      "url": "/#contact"
+    },
+    {
+      "name": "Blog",
+      "url": "/blog"
+    }
+  ],
+  "footerMenu": [
+    {
+      "name": "Our Blog",
+      "url": "/blog"
+    },
+    {
+      "name": "Terms & Conditions",
+      "url": "/terms-and-conditions"
+    },
+    {
+      "name": "Privacy Policy",
+      "url": "/privacy-policy"
+    },
+    {
+      "name": "Cookies",
+      "url": "/cookies"
+    }
+  ]
+}

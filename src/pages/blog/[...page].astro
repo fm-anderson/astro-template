@@ -1,0 +1,75 @@
+---
+import type { GetStaticPathsOptions, Page } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import BlogPostCard from "../../components/BlogPostCard.astro";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const allPosts = (await getCollection("blog")).sort(
+    (a, b) => b.data.publishedTime.valueOf() - a.data.publishedTime.valueOf(),
+  );
+
+  return paginate(allPosts, { pageSize: 6 });
+}
+
+interface Props {
+  page: Page<CollectionEntry<"blog">>;
+}
+
+const { page } = Astro.props;
+---
+
+<Layout
+  title="SEO optimized title for your new website blog!"
+  description="SEO optimized description for your new website blog!"
+>
+  <main class="mx-auto max-w-7xl px-6 py-12 sm:py-16">
+    <header class="mb-12 border-b border-gray-200 pb-8 text-center">
+      <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+        SEO optimized H1 for your new blog
+      </h1>
+      <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
+        SEO optimized paragraph description for your new blog
+      </p>
+    </header>
+
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {page.data.map((post) => <BlogPostCard post={post} />)}
+    </div>
+
+    <nav
+      class="mt-12 flex items-center justify-between"
+      aria-label="Blog pagination"
+    >
+      <div>
+        {
+          page.url.prev && (
+            <a
+              href={page.url.prev}
+              class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            >
+              &larr; Newer Posts
+            </a>
+          )
+        }
+      </div>
+
+      <p class="text-sm text-gray-500">
+        Page {page.currentPage} of {page.lastPage}
+      </p>
+
+      <div>
+        {
+          page.url.next && (
+            <a
+              href={page.url.next}
+              class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            >
+              Older Posts &rarr;
+            </a>
+          )
+        }
+      </div>
+    </nav>
+  </main>
+</Layout>

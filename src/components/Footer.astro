@@ -1,25 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
 import siteConfig from "../config/siteConfig.json";
+import menuConfig from "../config/menuConfig.json";
 
-const footerMenu = [
-  {
-    name: "Our Blog",
-    url: "/blog",
-  },
-  {
-    name: "Terms & Conditions",
-    url: "/terms-and-conditions",
-  },
-  {
-    name: "Privacy Policy",
-    url: "/privacy-policy",
-  },
-  {
-    name: "Cookies",
-    url: "/cookies",
-  },
-];
+const navLinks = menuConfig.footerMenu;
 ---
 
 <footer class="bg-gray-50">
@@ -47,7 +31,7 @@ const footerMenu = [
           class="mt-2 flex flex-wrap justify-center gap-4 text-sm lg:justify-end"
         >
           {
-            footerMenu.map((item) => (
+            navLinks.map((item) => (
               <li>
                 <a
                   href={item.url}
