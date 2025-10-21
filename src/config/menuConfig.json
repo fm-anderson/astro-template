@@ -28,15 +28,15 @@
     },
     {
       "name": "Terms & Conditions",
-      "url": "/terms-and-conditions"
+      "url": "/legal/terms-and-conditions"
     },
     {
       "name": "Privacy Policy",
-      "url": "/privacy-policy"
+      "url": "/legal/privacy-policy"
     },
     {
       "name": "Cookies",
-      "url": "/cookies"
+      "url": "/legal/cookies"
     }
   ]
 }
